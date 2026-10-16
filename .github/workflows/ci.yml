@@ -9,7 +9,11 @@ jobs:
             - name: code
               uses: actions/checkout@v4
             - name: build
-              run: bkdir build | cd build | cmake .. | cmake --build .
+              run: | 
+                mkdir build 
+                cd build 
+                cmake .. 
+                cmake --build .
     test:
         runs-on: windows-latest
         steps:
