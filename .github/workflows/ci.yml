@@ -27,5 +27,13 @@ jobs:
                 cmake --build build
 
             - name: test
-              run: ctest --test-dir build
+              shell: bash
+              run: ctest --test-dir build --output-on-failure 2>&1 | tee test.log
+
+            - name: upload log
+              if: always()
+              uses: actions/upload-artifact@v4
+              with:
+                name: test-log-${{ matrix.os }}
+                path: test.log
 
