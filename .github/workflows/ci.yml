@@ -1,0 +1,15 @@
+name: lab6
+
+on: push
+
+jobs: 
+    test1:
+        runs-on: ubuntu-latest
+        steps:
+            - name: ogo
+              run: echo "kek"
+    test2:
+        runs-on: windows-latest
+        steps:
+            - name: ogo2
+              run: echo "goga"
