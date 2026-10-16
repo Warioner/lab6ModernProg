@@ -18,3 +18,8 @@ jobs:
                 cmake --build build
             - name: test
               run: ctest --test-dir build
+            - name: cashe
+              uses: actions/cache@v4
+              with:
+                path: ./build/dataconv
+                key: ${{ matrix.os }}-build-${{ hashFiles('dataconv') }}
