@@ -3,7 +3,7 @@ name: lab6
 on: push
 
 jobs: 
-    build:
+    build-and-test:
         runs-on: ubuntu-latest
         steps:
             - name: code
@@ -14,8 +14,5 @@ jobs:
                 cd build 
                 cmake .. 
                 cmake --build .
-    test:
-        runs-on: windows-latest
-        steps:
-            - name: ogo2
-              run: echo "goga"
+            - name: test
+              run: ./build/dataconv_tests
