@@ -4,15 +4,16 @@ on: push
 
 jobs: 
     build-and-test:
-        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                os: [ubuntu-latest, windows-latest, macos-latest]
+        runs-on: ${{ matrix.os }}
         steps:
             - name: code
               uses: actions/checkout@v4
             - name: build
               run: | 
-                mkdir build 
-                cd build 
-                cmake .. 
-                cmake --build .
+                cmake -S . -B build
+                cmake --build build
             - name: test
-              run: ./build/dataconv_tests
+              run: ctest --test-dir build
