@@ -3,12 +3,14 @@ name: lab6
 on: push
 
 jobs: 
-    test1:
+    build:
         runs-on: ubuntu-latest
         steps:
-            - name: ogo
-              run: echo "kek"
-    test2:
+            - name: code
+              uses: actions/checkout@v4
+            - name: build
+              run: bkdir build | cd build | cmake .. | cmake --build .
+    test:
         runs-on: windows-latest
         steps:
             - name: ogo2
