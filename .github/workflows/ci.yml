@@ -13,7 +13,7 @@ jobs:
             - name: code
               uses: actions/checkout@v4
 
-            - name: cache
+            - name: cashe
               uses: actions/cache@v4
               with:
                 path: ./build
@@ -27,5 +27,5 @@ jobs:
                 cmake --build build
 
             - name: test
-              run:  ctest --test-dir build -C Release --output-on-failure
+              run: ctest --test-dir build
 
