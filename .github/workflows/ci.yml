@@ -12,17 +12,20 @@ jobs:
         steps:
             - name: code
               uses: actions/checkout@v4
-            - name: build
-              run: | 
-                cmake -S . -B build
-                cmake --build build
+
             - name: cashe
               uses: actions/cache@v4
               with:
                 path: ./build
-                key: ${{ matrix.os }}-build-${{ hashFiles('dataconv') }}
+                key: ${{ matrix.os }}-build-${{ hashFiles('**/CMakeLists.txt', '**/*.cpp', '**/*.h', '**/*.hpp') }}
                 restore-keys: |
                     ${{ matrix.os }}-build-
+
+            - name: build
+              run: | 
+                cmake -S . -B build
+                cmake --build build
+
             - name: test
               run: ctest --test-dir build
 
