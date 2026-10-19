@@ -1,6 +1,6 @@
 name: lab6
 
-on: push
+on: [ push , pull_request ]
 
 jobs: 
     build-and-test:
@@ -25,6 +25,17 @@ jobs:
               run: | 
                 cmake -S . -B build
                 cmake --build build
+
+            - name: upload app
+              if: success()
+              uses: actions/upload-artifact@v4
+              with:
+                name: dataconv-${{ matrix.os }}
+                path: |
+                    build/dataconv
+                    build/*/dataconv
+                    build/*/dataconv.exe
+                if-no-files-found: ignore
 
             - name: test
               shell: bash
